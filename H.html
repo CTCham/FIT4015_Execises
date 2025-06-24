@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Tỏ tình vui vẻ</title>
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      background-color: #ffe4ef; /* Màu hồng nhạt */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;   /* căn giữa theo chiều dọc */
+      align-items: center;       /* căn giữa theo chiều ngang */
+      font-family: Arial, sans-serif;
+      text-align: center;
+      overflow: hidden;
+    }
+    #question {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    #yes {
+      padding: 10px 20px;
+      font-size: 20px;
+      background-color: #ff5e78;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      margin-right: 10px;
+      transition: font-size 0.1s;
+    }
+    #no {
+      padding: 10px 20px;
+      font-size: 20px;
+      background-color: #ccc;
+      border: none;
+      border-radius: 5px;
+    }
+    #response {
+      margin-top: 30px;
+      font-size: 24px;
+      color: #ff3399;
+    }
+    .heart {
+      position: fixed;
+      top: -50px;
+      color: #ff3399;
+      font-size: 30px;
+      pointer-events: none;
+      animation: fall 2.5s linear forwards;
+      z-index: 999;
+      opacity: 0.85;
+      filter: drop-shadow(0 0 6px #ffb6d5);
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0.2;
+      }
+    }
+    .button-row {
+      display: flex;
+      justify-content: space-between;
+      width: 300px;
+      margin: 0 auto 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <img id="meo-cute" src="meocute.png" alt="meo cute" style="width:180px; margin-bottom: 20px;">
+  <div id="question">Ngân Hà ơi, bé có iu c hongg?</div>
+  <div class="button-row" id="button-row">
+    <button id="yes">Có</button>
+    <button id="no">Không</button>
+  </div>
+  <div id="response"></div>
+  <img id="cat-hug" src="haimeo.png" alt="cat hug" style="display:none; margin-top:20px; width:180px;">
+  <script>
+    const yesBtn = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+    const response = document.getElementById("response");
+    const question = document.getElementById("question");
+    const catHug = document.getElementById("cat-hug");
+    const buttonRow = document.getElementById("button-row");
+    const meoCute = document.getElementById("meo-cute");
+
+    let yesFontSize = 20;
+
+    const funnyMessages = [
+      "Bé nghiêm túc chứ?",
+      "Nghĩ lại đi mà...",
+      "Đừng tàn nhẫn vậy chớ 🥺",
+      "C buồn đó nha...",
+      "Nhấn nhầm đúng không?",
+      "C hông tin đâu 😤",
+      "Bé đang đùa đúng không?",
+      "Bé có đang nghĩ đến C không?",
+        "C sẽ chờ đợi câu trả lời của bé...",
+        "C sẽ không bỏ cuộc đâu!",
+        "C sẽ luôn yêu bé dù thế nào đi nữa!",
+        "C sẽ luôn ở đây, bên cạnh bé!",
+        "C sẽ không bao giờ từ bỏ bé!",
+        "C sẽ luôn tin tưởng vào tình yêu của chúng ta!",
+        "C sẽ luôn yêu bé, dù bé có nói gì đi nữa!",
+        "C sẽ luôn chờ đợi bé, dù có phải đợi bao lâu đi nữa!",
+        "C sẽ luôn yêu bé, dù bé có nói không!",
+        "C sẽ luôn yêu bé, dù bé có nói có!",
+        "C sẽ luôn yêu bé, dù bé có nói không biết!",
+        "C sẽ luôn yêu bé, dù bé có nói không chắc chắn!",
+    ];
+
+    noBtn.addEventListener("click", () => {
+      const randomMsg = funnyMessages[Math.floor(Math.random() * funnyMessages.length)];
+      noBtn.textContent = randomMsg;
+      yesFontSize += 15;
+      yesBtn.style.fontSize = yesFontSize + "px";
+    });
+
+    yesBtn.addEventListener("click", () => {
+      question.style.display = "none";
+      buttonRow.style.display = "none";
+      meoCute.style.display = "none";
+      response.innerHTML = 'C biết sẽ như vậy mà (&gt;ᴗ&lt;)♡°°<br>C cũng iuu bé <span style="color:#ff3399;font-size:1.2em;">&#10084;</span>';
+      catHug.style.display = "block";
+    });
+
+    // Hiệu ứng trái tim rơi
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "&#10084;";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (24 + Math.random() * 32) + "px";
+      heart.style.animationDuration = (1.8 + Math.random() * 1.5) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 3000);
+    }
+    setInterval(createHeart, 180);
+  </script>
+</body>
+</html>
